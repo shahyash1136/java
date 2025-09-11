@@ -6,6 +6,7 @@ import pojo.Account;
 import pojo.Checking;
 import pojo.Credit;
 import repository.AccountRepository;
+import service.AccountService;
 import service.CheckingService;
 import service.CreditService;
 
@@ -38,6 +39,11 @@ public class Main {
         checking.setBalance(checking.getBalance().add(new BigDecimal("100")));
         repository.updateAccount(checking);
         repository.deleteAccount("G4567H");
+
+        AccountService checkingServices = new CheckingService(repository);
+
+        checkingServices.desposit("1", new BigDecimal("100"));
+        checkingServices.withdraw("1", new BigDecimal("50"));
 
     }
 

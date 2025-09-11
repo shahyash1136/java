@@ -6,43 +6,42 @@ import pojo.Credit;
 import repository.AccountRepository;
 
 public class CreditService implements AccountService {
-    AccountRepository accountRepository;
+
+    private AccountRepository repository;
 
     @Override
-    public void desposit(String id, BigDecimal amount) {
-        // TODO Auto-generated method stub
+    public void deposit(String id, BigDecimal amount) {
         Credit account = retrieveAccount(id);
         account.setCredit(account.getCredit().subtract(amount));
-        updateAccount(account);
+        updateAccount(account);   
     }
-
+    
     @Override
     public void withdraw(String id, BigDecimal amount) {
-        // TODO Auto-generated method stub
         Credit account = retrieveAccount(id);
         account.setCredit(account.getCredit().add(amount));
-        updateAccount(account);
-
+        updateAccount(account);           
     }
 
-    public CreditService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public CreditService(AccountRepository repository) {
+        this.repository = repository;
     }
 
     public void createAccount(Credit account) {
-        this.accountRepository.createAccount(account);
+        this.repository.createAccount(account);
     }
 
     public Credit retrieveAccount(String id) {
-        return (Credit) this.accountRepository.retrieveAccount(id);
+        return (Credit)this.repository.retrieveAccount(id);
     }
 
     public void updateAccount(Credit account) {
-        this.accountRepository.updateAccount(account);
+        this.repository.updateAccount(account);
     }
 
     public void deleteAccount(String id) {
-        this.accountRepository.deleteAccount(id);
+        this.repository.deleteAccount(id);
     }
+
 
 }

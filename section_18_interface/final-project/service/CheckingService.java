@@ -6,11 +6,11 @@ import pojo.Checking;
 import repository.AccountRepository;
 
 public class CheckingService implements AccountService {
-    AccountRepository accountRepository;
+
+    private AccountRepository repository;
 
     @Override
-    public void desposit(String id, BigDecimal amount) {
-        // TODO Auto-generated method stub
+    public void deposit(String id, BigDecimal amount) {
         Checking account = retrieveAccount(id);
         account.setBalance(account.getBalance().add(amount));
         updateAccount(account);
@@ -18,30 +18,30 @@ public class CheckingService implements AccountService {
 
     @Override
     public void withdraw(String id, BigDecimal amount) {
-        // TODO Auto-generated method stub
         Checking account = retrieveAccount(id);
         account.setBalance(account.getBalance().subtract(amount));
         updateAccount(account);
-
     }
 
-    public CheckingService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public CheckingService(AccountRepository repository) {
+        this.repository = repository;
     }
 
     public void createAccount(Checking account) {
-        this.accountRepository.createAccount(account);
+        this.repository.createAccount(account);
     }
 
     public Checking retrieveAccount(String id) {
-        return (Checking) this.accountRepository.retrieveAccount(id);
+        return (Checking)this.repository.retrieveAccount(id);
     }
 
     public void updateAccount(Checking account) {
-        this.accountRepository.updateAccount(account);
+        this.repository.updateAccount(account);
     }
 
     public void deleteAccount(String id) {
-        this.accountRepository.deleteAccount(id);
+        this.repository.deleteAccount(id);
     }
+
+
 }
